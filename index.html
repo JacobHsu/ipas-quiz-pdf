@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>iPAS AI 應用規劃師 初級/中級 練習</title>
+<style>
+:root {
+  --bg: #f7f8fa;
+  --card: #ffffff;
+  --border: #e3e6ec;
+  --text: #1a1f2e;
+  --muted: #6b7280;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-soft: #f5f3ff;
+  --accent-soft-border: #ddd6fe;
+  --accent-chip-bg: #eef2ff;
+  --correct: #10b981;
+  --correct-bg: #d1fae5;
+  --correct-fg: #065f46;
+  --wrong: #ef4444;
+  --wrong-bg: #fee2e2;
+  --wrong-fg: #991b1b;
+  --wrong-soft-bg: #fef2f2;
+  --warn-bg: #fef3c7;
+  --warn-fg: #92400e;
+  --warn-fg-strong: #78350f;
+  --warn-border: #f59e0b;
+  --surface-2: #f3f4f6;
+  --surface-3: #e5e7eb;
+  --subject-chip-bg: #ede9fe;
+  --subject-chip-fg: #5b21b6;
+  --code-bg: rgba(79,70,229,0.08);
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0; padding: 0;
+  font-family: "PMingLiU", "新細明體", "MingLiU", "細明體", "Noto Serif TC", "Songti TC", "宋体", serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+.container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 80px;
+}
+header {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 24px; padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+header h1 { font-size: 18px; margin: 0; font-weight: 600; }
+header .nav { display: flex; gap: 8px; }
+.btn {
+  padding: 8px 14px; border: 1px solid var(--border);
+  background: var(--card); color: var(--text);
+  border-radius: 8px; cursor: pointer; font-size: 14px;
+  font-family: inherit; transition: all 0.15s;
+  text-decoration: none;
+}
+.btn:hover { background: var(--surface-2); }
+.btn-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 7px 9px;
+}
+.btn-icon svg { display: block; }
+/* Windows 7 button — silver gradient, subtle bevel, light-blue glow on hover (Aero default button). */
+.btn-primary {
+  color: #000000;
+  border: 1px solid #707070;
+  border-radius: 3px;
+  min-width: 90px; padding: 6px 18px;
+  background: linear-gradient(to bottom,
+    #f5f5f5 0%,
+    #e8e8e8 45%,
+    #d8d8d8 50%,
+    #e2e2e2 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(0,0,0,0.05),
+    0 1px 0 rgba(0,0,0,0.04);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
+  font-weight: 600;
+}
+.btn-primary:hover {
+  border-color: #3c7fb1;
+  background: linear-gradient(to bottom,
+    #eaf6fd 0%,
+    #d9f0fc 45%,
+    #bee6fd 50%,
+    #a7d9f5 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 0 0 1px rgba(120,180,220,0.6),
+    0 0 6px rgba(60,127,177,0.4);
+}
+.btn-primary:active {
+  background: linear-gradient(to bottom,
+    #c4e0f3 0%,
+    #98c8e8 45%,
+    #7ab8df 50%,
+    #92c5e6 100%);
+  box-shadow:
+    inset 0 1px 2px rgba(0,0,0,0.18),
+    inset 0 0 0 1px rgba(60,127,177,0.5);
+}
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+/* Windows-style window frame — applied to every .card. h2 acts as title bar. */
+.card {
+  background: var(--card);
+  border: 1px solid #1f3a5f;
+  border-radius: 6px 6px 2px 2px;
+  padding: 0;
+  margin-bottom: 24px;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.4) inset,
+    0 10px 28px rgba(0,0,0,0.22),
+    0 3px 8px rgba(0,0,0,0.14);
+  overflow: hidden;
+}
+.card > h2,
+.card > .title-bar {
+  margin: 0;
+  padding: 7px 14px;
+  font-size: 14px; font-weight: 700;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0,0,0,0.35);
+  background: linear-gradient(to bottom,
+    #5ea1e8 0%,
+    #3079c8 45%,
+    #1f5fa8 50%,
+    #2c75c0 100%);
+  border-bottom: 1px solid #0d3b6e;
+  letter-spacing: 0.3px;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+}
+.card > h2 .title-right,
+.card > .title-bar .title-right {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-weight: 500;
+}
+.card > *:not(h2):not(.title-bar) { padding-left: 20px; padding-right: 20px; }
+.card > *:not(h2):not(.title-bar):first-of-type { padding-top: 18px; }
+.card > *:last-child:not(h2):not(.title-bar) { padding-bottom: 18px; }
+/* Title-bar chips: lighter inverted look so they stand out on blue */
+.card > h2 .q-topic-chip,
+.card > .title-bar .q-topic-chip {
+  background: rgba(255,255,255,0.92); color: #1f5fa8;
+  text-shadow: none; font-weight: 600;
+}
+.card > h2 .q-new-chip,
+.card > .title-bar .q-new-chip {
+  background: #fde68a; color: #78350f;
+  text-shadow: none;
+}
+.field { margin-bottom: 16px; }
+.field label { display: block; font-size: 13px; color: var(--muted); margin-bottom: 6px; font-weight: 500; }
+.field select, .field input {
+  width: 100%; padding: 6px 8px;
+  border: 2px solid;
+  border-color: #808080 #ffffff #ffffff #808080;
+  border-radius: 0;
+  font-size: 14px; background: var(--card); font-family: inherit;
+}
+.row { display: flex; gap: 12px; }
+.row .field { flex: 1; }
+.progress-bar {
+  height: 4px; background: var(--surface-3); border-radius: 2px;
+  overflow: hidden; margin-bottom: 24px;
+}
+.progress-fill {
+  height: 100%; background: var(--accent); transition: width 0.3s;
+}
+.q-meta {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-bottom: 16px; font-size: 13px; color: var(--muted);
+}
+.q-topic-chip {
+  display: inline-block; padding: 3px 10px; background: var(--accent-chip-bg);
+  color: var(--accent); border-radius: 999px; font-size: 12px; font-weight: 500;
+}
+.q-new-chip {
+  display: inline-block; margin-left: 6px; padding: 3px 10px;
+  background: var(--correct-bg); color: var(--correct-fg);
+  border-radius: 999px; font-size: 12px; font-weight: 600;
+}
+.q-new-chip::before { content: "✨ "; }
+.q-text {
+  font-size: 18px; line-height: 1.8; margin-bottom: 20px;
+  white-space: pre-wrap; word-wrap: break-word;
+  font-weight: 700;
+}
+.q-image { margin: 0 0 20px; text-align: center; }
+.q-image img {
+  max-width: 100%; height: auto;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: #fff;
+}
+.options { display: flex; flex-direction: column; gap: 4px; }
+.option {
+  display: flex; align-items: flex-start; gap: 10px;
+  padding: 8px 8px; border-radius: 6px;
+  cursor: pointer; transition: background 0.12s;
+  background: transparent; font-size: 16px;
+  color: var(--text); line-height: 1.8;
+}
+.option:hover:not(.answered) { background: var(--surface-2); }
+.option.answered { cursor: default; }
+.option input[type="radio"] {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  margin: 4px 0 0;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+.option.answered input[type="radio"] { cursor: default; }
+.option .letter { flex-shrink: 0; font-weight: 600; min-width: 1.6em; }
+.option .text { flex: 1; }
+.option.selected.correct { color: var(--correct-fg); }
+.option.selected.correct .letter,
+.option.selected.correct .text { font-weight: 600; }
+.option.selected.correct input[type="radio"] { accent-color: var(--correct); }
+.option.selected.wrong { color: var(--wrong-fg); }
+.option.selected.wrong .text { text-decoration: line-through; }
+.option.selected.wrong input[type="radio"] { accent-color: var(--wrong); }
+.option.reveal-correct { color: var(--correct-fg); }
+.option.reveal-correct .letter,
+.option.reveal-correct .text { font-weight: 600; }
+.option.reveal-correct::after {
+  content: "✓ 正解"; color: var(--correct);
+  font-size: 12px; font-weight: 600;
+  margin-left: 6px; align-self: center;
+  padding: 2px 8px; background: var(--correct-bg); border-radius: 999px;
+}
+.feedback {
+  margin-top: 20px; padding: 16px; border-radius: 10px;
+  font-size: 14px;
+}
+.feedback.correct { background: var(--correct-bg); color: var(--correct-fg); }
+.feedback.wrong { background: var(--wrong-bg); color: var(--wrong-fg); }
+.feedback strong { font-weight: 600; }
+.feedback .source { display: block; margin-top: 8px; font-size: 12px; opacity: 0.8; }
+.feedback .source a { color: inherit; text-decoration: underline; }
+.feedback .source a:hover { opacity: 1; text-decoration: none; }
+.next-btn-row { display: flex; justify-content: flex-end; margin-top: 16px; gap: 8px; }
+.why-panel {
+  margin-top: 12px; padding: 16px;
+  background: var(--accent-soft); border: 1px solid var(--accent-soft-border);
+  border-radius: 10px;
+}
+.why-panel h3 {
+  margin: 0 0 12px; font-size: 14px; color: var(--accent);
+  font-weight: 600;
+}
+.why-row {
+  display: flex; gap: 12px; align-items: flex-start;
+  font-size: 13px; margin-bottom: 6px; line-height: 1.5;
+}
+.why-row .why-label {
+  flex-shrink: 0; min-width: 50px; color: var(--muted);
+  font-weight: 500;
+}
+.why-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+.btn-link {
+  background: var(--card); color: var(--accent);
+  border-color: var(--accent-soft-border); font-size: 13px; padding: 6px 12px;
+  text-decoration: none;
+}
+.btn-link:hover { background: var(--card); border-color: var(--accent); }
+.why-panel .muted { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+.shuffle-note {
+  font-size: 12px; color: var(--warn-fg); background: var(--warn-bg);
+  padding: 8px 12px; border-radius: 6px; margin: 0 0 12px;
+  border-left: 3px solid var(--warn-border);
+}
+.shuffle-note strong { color: var(--warn-fg-strong); }
+.why-explanation { font-size: 14px; line-height: 1.7; color: var(--text); }
+.why-explanation p { margin: 0 0 10px; }
+.why-explanation p:last-child { margin-bottom: 0; }
+.why-explanation ul { margin: 4px 0 12px 20px; padding: 0; }
+.why-explanation li { margin-bottom: 4px; }
+.why-explanation strong { color: var(--accent); font-weight: 600; }
+.why-explanation code {
+  background: var(--code-bg); padding: 1px 6px;
+  border-radius: 4px; font-size: 13px;
+  font-family: -apple-system-monospace, "SF Mono", Menlo, monospace;
+}
+.score-display {
+  display: flex; gap: 16px; align-items: baseline;
+  margin-bottom: 24px;
+}
+.score-big { font-size: 40px; font-weight: 700; color: var(--accent); }
+.score-pct { font-size: 18px; color: var(--muted); }
+.summary-section { margin-top: 24px; }
+.summary-section h3 { font-size: 14px; color: var(--muted); margin: 0 0 12px; font-weight: 600; }
+.miss-item {
+  padding: 12px; border-left: 3px solid var(--wrong);
+  background: var(--wrong-soft-bg); margin-bottom: 8px; border-radius: 4px;
+  font-size: 13px;
+}
+.miss-item .miss-q { font-weight: 500; margin-bottom: 4px; }
+.miss-item .miss-detail { color: var(--muted); }
+.miss-recap {
+  margin-top: 12px; padding: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 8px;
+}
+.miss-recap summary {
+  cursor: pointer; font-weight: 600; font-size: 13px;
+  color: var(--accent); list-style: none; user-select: none;
+}
+.miss-recap summary::-webkit-details-marker { display: none; }
+.miss-recap summary::before {
+  content: "▶"; display: inline-block; margin-right: 6px;
+  font-size: 10px; transition: transform 0.15s;
+}
+.miss-recap[open] summary::before { transform: rotate(90deg); }
+.miss-recap-body { margin-top: 12px; }
+.miss-full-q {
+  font-size: 14px; line-height: 1.7; color: var(--text);
+  margin-bottom: 12px; white-space: pre-wrap; word-wrap: break-word;
+}
+.miss-choice {
+  display: flex; gap: 10px; align-items: flex-start;
+  padding: 8px 12px; border-radius: 6px;
+  font-size: 13px; margin-bottom: 6px; line-height: 1.5;
+}
+.miss-choice-wrong { background: var(--wrong-bg); color: var(--wrong-fg); }
+.miss-choice-correct { background: var(--correct-bg); color: var(--correct-fg); }
+.miss-choice-label {
+  flex-shrink: 0; font-weight: 600; min-width: 56px;
+}
+.miss-no-explain { color: var(--muted); font-size: 13px; font-style: italic; margin-top: 8px; }
+.wrong-count-badge {
+  display: inline-block; padding: 1px 8px;
+  background: var(--wrong); color: white;
+  border-radius: 999px; font-size: 11px; font-weight: 600;
+  margin: 0 4px; vertical-align: middle;
+}
+.subject-chip {
+  display: inline-block; padding: 1px 8px;
+  background: var(--subject-chip-bg); color: var(--subject-chip-fg);
+  border-radius: 999px; font-size: 11px; font-weight: 600;
+  margin: 0 4px 0 0; vertical-align: middle;
+}
+.history-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.history-table th, .history-table td {
+  text-align: left; padding: 10px; border-bottom: 1px solid var(--border);
+}
+.history-table th { font-weight: 600; color: var(--muted); font-size: 12px; text-transform: uppercase; }
+.weak-pill {
+  display: inline-block; padding: 4px 10px; margin: 4px 4px 0 0;
+  background: var(--warn-bg); color: var(--warn-fg); border-radius: 999px; font-size: 12px;
+}
+.empty-state { text-align: center; padding: 40px 20px; color: var(--muted); }
+.note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+.kbd {
+  display: inline-block; padding: 2px 6px; background: var(--surface-2);
+  border: 1px solid var(--border); border-radius: 4px; font-family: monospace;
+  font-size: 11px;
+}
+.site-footer {
+  margin-top: 32px;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 13px;
+  color: var(--muted);
+}
+.site-footer a {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--muted); text-decoration: none;
+}
+.site-footer a:hover { color: var(--text); text-decoration: underline; }
+@media (max-width: 600px) {
+  .container { padding: 16px 12px 60px; }
+  header h1 { font-size: 15px; }
+  .row { flex-direction: column; gap: 0; }
+  .q-text { font-size: 16px; }
+  .option { font-size: 15px; }
+  .score-big { font-size: 32px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1 id="title">iPAS AI 應用規劃師 初級/中級 練習</h1>
+    <div class="nav">
+      <button class="btn" onclick="goHome()">首頁</button>
+      <button class="btn" onclick="showHistory()">歷史</button>
+    </div>
+  </header>
+  <div id="app"><div class="card" style="text-align:center;color:var(--muted)">載入題庫中…</div></div>
+  <footer class="site-footer">
+    <a href="https://github.com/JacobHsu/ipas-quiz-pdf" target="_blank" rel="noopener noreferrer" title="GitHub 原始碼 · Open Source" aria-label="View source on GitHub">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+      <span>GitHub 原始碼</span>
+    </a>
+  </footer>
+</div>
+
+<script src="config.js"></script>
+<script>
+let POOL = [];
+
+async function loadPool() {
+  const entries = Object.entries(POOL_SOURCES);
+  const results = await Promise.all(entries.map(async ([code, url]) => {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Failed to load ${url}: ${res.status}`);
+    return res.json();
+  }));
+  POOL = results.flat();
+}
+
+function showLoadError(err) {
+  console.error(err);
+  const app = document.getElementById("app");
+  if (app) {
+    app.innerHTML = '<div class="card"><h2>題庫載入失敗</h2><p style="color:var(--muted)">請確認你是透過 HTTP 伺服器開啟此頁（不能直接用 file:// 開啟）。詳細錯誤請開瀏覽器 DevTools Console。</p></div>';
+  }
+}
+// Config (SUBJECTS, LEVELS, TOPIC_REFS, STORAGE_KEY, POOL_SOURCES, SOURCE_PDF_MAP, WRONG_BOOST)
+// lives in config.js, loaded before this script.
+
+
+function refForQuestion(q) {
+  return (TOPIC_REFS[q.subject_code] || {})[q.topic] || null;
+}
+function studyGuideFor(q) {
+  return (SUBJECTS[q.subject_code] || SUBJECTS.s1).study_guide;
+}
+
+function resolvePdfName(name) { return SOURCE_PDF_MAP[name] || name; }
+
+function pdfHref(filename, page) {
+  // Encode each path segment separately so "/" survives as a path separator (relative paths with subdirs).
+  const path = resolvePdfName(filename).split("/").map(encodeURIComponent).join("/");
+  return path + "#page=" + page;
+}
+
+let state = {
+  view: "home",
+  round: null,
+  selected: null,
+  answered: false,
+  showWhy: false
+};
+
+function getRounds() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]"); }
+  catch { return []; }
+}
+function saveRounds(rounds) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(rounds));
+}
+function appendRound(round) {
+  const rounds = getRounds();
+  rounds.push(round);
+  saveRounds(rounds);
+}
+
+// All getters accept an optional subjectFilter ("s1", "s2", "s3", or "all").
+function poolForSubject(subjectFilter) {
+  if (!subjectFilter || subjectFilter === "all") return POOL;
+  return POOL.filter(q => q.subject_code === subjectFilter);
+}
+
+function getTopics(subjectFilter) {
+  const counts = {};
+  poolForSubject(subjectFilter).forEach(q => counts[q.topic] = (counts[q.topic] || 0) + 1);
+  return Object.entries(counts).sort((a,b) => b[1] - a[1]);
+}
+
+function getWeakTopics(subjectFilter) {
+  const counts = {};
+  getRounds().forEach(r => {
+    r.responses.forEach(resp => {
+      if (!resp.is_correct) {
+        const q = POOL.find(q => q.id === resp.q_id);
+        if (!q) return;
+        if (subjectFilter && subjectFilter !== "all" && q.subject_code !== subjectFilter) return;
+        counts[q.topic] = (counts[q.topic] || 0) + 1;
+      }
+    });
+  });
+  return Object.entries(counts).sort((a,b) => b[1] - a[1]);
+}
+
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+// q_id → unresolved wrong count across all history. Iterates chronologically so a correct answer
+// clears the entry; a subsequent wrong starts the count over.
+function getWrongCountMap() {
+  const map = new Map();
+  getRounds().forEach(r => {
+    r.responses.forEach(resp => {
+      if (resp.is_correct) map.delete(resp.q_id);
+      else map.set(resp.q_id, (map.get(resp.q_id) || 0) + 1);
+    });
+  });
+  return map;
+}
+
+// Weighted sampling without replacement. weights must be positive and match items 1:1.
+function weightedSampleNoReplace(items, weights, k) {
+  const pool = items.slice();
+  const w = weights.slice();
+  const picked = [];
+  while (picked.length < k && pool.length > 0) {
+    let total = 0;
+    for (let i = 0; i < w.length; i++) total += w[i];
+    let r = Math.random() * total;
+    let idx = 0;
+    for (; idx < pool.length - 1; idx++) {
+      r -= w[idx];
+      if (r <= 0) break;
+    }
+    picked.push(pool[idx]);
+    pool.splice(idx, 1);
+    w.splice(idx, 1);
+  }
+  return picked;
+}
+
+function pickQuestions(subjectFilter, topicFilter, count) {
+  let pool = poolForSubject(subjectFilter);
+  if (topicFilter && topicFilter !== "all") {
+    if (topicFilter.includes("/")) {
+      pool = pool.filter(q => q.topic === topicFilter);
+    } else {
+      pool = pool.filter(q => q.topic.startsWith(topicFilter + "/") || q.topic === topicFilter);
+    }
+  }
+  const wrongMap = getWrongCountMap();
+  const weights = pool.map(q => 1 + WRONG_BOOST * (wrongMap.get(q.id) || 0));
+  return weightedSampleNoReplace(pool, weights, Math.min(count, pool.length));
+}
+
+function escapeHtml(s) {
+  return s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+// When options are shuffled, rewrite the explanation's letter references (A/B/C/D) so they match the
+// displayed letter order shown on screen. Keeps the explanation consistent with the highlighted option.
+function translateExplanation(md, displayOrder) {
+  if (!displayOrder || displayOrder.join(",") === "A,B,C,D") return md;
+  const orig = ["A","B","C","D"];
+  // map[origLetter] = displayed letter (e.g., original "D" might display as "B")
+  const map = {};
+  orig.forEach(L => map[L] = orig[displayOrder.indexOf(L)]);
+
+  // Pass 1: rewrite "為什麼 X 是" (the "why is X correct" header)
+  let out = md.replace(/為什麼\s+([A-D])\s+是/g, (_, L) => `為什麼 ${map[L]} 是`);
+  // Pass 2: rewrite the leading letter group on bullet items. Supports any
+  // number of letters joined by "/" with optional intermediate dots and
+  // whitespace, e.g. "- A.", "- A/B.", "- A/B/C.", "- A./B./C.".
+  out = out.replace(/^(\s*-\s+)((?:[A-D]\.?\s*\/\s*)*[A-D])\./gm, (_, prefix, group) => {
+    // Extract [A-D] tokens from the captured group, remap each, then sort
+    // so the joined group reads alphabetically (e.g. "B/D/C" → "B/C/D").
+    const remapped = (group.match(/[A-D]/g) || []).map(L => map[L]).sort();
+    return prefix + remapped.join("/") + ".";
+  });
+
+  // Pass 3: sort the consecutive bullet block by its first letter so the list reads A→D again.
+  // Allow joined-letter bullets like "- B/D/C." (capture only the first letter for sorting).
+  const lines = out.split("\n");
+  const bulletRe = /^\s*-\s+([A-D])[\.\/]/;
+  const result = [];
+  let buffer = [];
+  const flush = () => {
+    if (buffer.length > 0) {
+      buffer.sort((a, b) => a[0].localeCompare(b[0]));
+      result.push(...buffer.map(x => x[1]));
+      buffer = [];
+    }
+  };
+  for (const line of lines) {
+    const m = bulletRe.exec(line);
+    if (m) buffer.push([m[1], line]);
+    else { flush(); result.push(line); }
+  }
+  flush();
+  return result.join("\n");
+}
+
+// Tiny markdown renderer for explanations: handles **bold**, `code`, bullet lists ("- "), and paragraph breaks.
+// Escapes everything else as HTML to stay safe.
+function renderMarkdown(md) {
+  const lines = md.split("\n");
+  const out = [];
+  let inList = false;
+  const inline = (s) => {
+    s = escapeHtml(s);
+    s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+    s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
+    return s;
+  };
+  for (const raw of lines) {
+    const line = raw.trimEnd();
+    if (/^\s*-\s+/.test(line)) {
+      if (!inList) { out.push("<ul>"); inList = true; }
+      out.push("<li>" + inline(line.replace(/^\s*-\s+/, "")) + "</li>");
+    } else {
+      if (inList) { out.push("</ul>"); inList = false; }
+      if (line === "") out.push("");
+      else out.push("<p>" + inline(line) + "</p>");
+    }
+  }
+  if (inList) out.push("</ul>");
+  return out.join("");
+}
+
+// ======== VIEWS ========
+function render() {
+  const app = document.getElementById("app");
+  if (state.view === "home") app.innerHTML = renderHome();
+  else if (state.view === "quiz") app.innerHTML = renderQuiz();
+  else if (state.view === "results") app.innerHTML = renderResults();
+  else if (state.view === "history") app.innerHTML = renderHistory();
+}
+
+function renderHome() {
+  let levelFilter = state.levelFilter || "intermediate";
+  let levelSubjects = Object.entries(SUBJECTS).filter(([, info]) => info.level === levelFilter);
+  if (levelSubjects.length === 0) {
+    levelFilter = "intermediate";
+    levelSubjects = Object.entries(SUBJECTS).filter(([, info]) => info.level === levelFilter);
+  }
+  let subjectFilter = state.subjectFilter || levelSubjects[0][0];
+  if (!levelSubjects.some(([code]) => code === subjectFilter)) subjectFilter = levelSubjects[0][0];
+  state.levelFilter = levelFilter;
+  state.subjectFilter = subjectFilter;
+  const topics = getTopics(subjectFilter);
+  const weakTopics = getWeakTopics(subjectFilter === "all" ? null : subjectFilter);
+  const rounds = getRounds();
+  const subjectRounds = subjectFilter === "all" ? rounds : rounds.filter(r => r.subject_code === subjectFilter);
+  const totalAsked = subjectRounds.reduce((sum, r) => sum + r.responses.length, 0);
+  const totalCorrect = subjectRounds.reduce((sum, r) => sum + r.responses.filter(x => x.is_correct).length, 0);
+  const overallPct = totalAsked > 0 ? Math.round(100 * totalCorrect / totalAsked) : 0;
+  const subjectPoolSize = poolForSubject(subjectFilter).length;
+
+  const levelOptions = Object.entries(LEVELS).map(([code, label]) => {
+    const n = Object.entries(SUBJECTS)
+      .filter(([, info]) => info.level === code)
+      .reduce((sum, [subjectCode]) => sum + poolForSubject(subjectCode).length, 0);
+    const sel = code === levelFilter ? "selected" : "";
+    return `<option value="${code}" ${sel}>${label} (${n} 題)</option>`;
+  }).join("");
+  // Build subject selector scoped by selected level (subjects don't mix in practice)
+  const subjectOptions = levelSubjects.map(([code, info]) => {
+    const n = poolForSubject(code).length;
+    const sel = code === subjectFilter ? "selected" : "";
+    return `<option value="${code}" ${sel}>${info.short.replace(/^初級/, "")} (${n} 題)</option>`;
+  }).join("");
+  // Group topics by family (within selected subject)
+  const families = {};
+  topics.forEach(([t, n]) => {
+    const fam = t.split("/")[0];
+    if (!families[fam]) families[fam] = 0;
+    families[fam] += n;
+  });
+  const familyOptions = Object.entries(families).sort((a,b) => b[1] - a[1])
+    .map(([f, n]) => `<option value="${f}">${f} (${n} 題)</option>`).join("");
+  const topicOptions = topics.map(([t, n]) =>
+    `<option value="${t}">${t} (${n} 題)</option>`).join("");
+
+  return `
+    <div class="card">
+      <h2>開始新一回合</h2>
+      <div class="row">
+        <div class="field">
+          <label>級別</label>
+          <select id="level-filter" onchange="onLevelChange()">
+            ${levelOptions}
+          </select>
+        </div>
+        <div class="field">
+          <label>科目</label>
+          <select id="subject-filter" onchange="onSubjectChange()">
+            ${subjectOptions}
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field">
+          <label>主題範圍</label>
+          <select id="topic-filter">
+            <option value="all">全部主題 (${subjectPoolSize} 題)</option>
+            <optgroup label="主題群組 (跨子分類)">${familyOptions}</optgroup>
+            <optgroup label="精細子主題">${topicOptions}</optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label>題目數量</label>
+          <select id="round-size">
+            <option value="5" selected>5 題 (快速)</option>
+            <option value="10">10 題 (標準)</option>
+            <option value="15">15 題 (進階)</option>
+            <option value="20">20 題 (深度)</option>
+            <option value="999">全部 (該主題所有題)</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>選項順序</label>
+        <select id="shuffle-options">
+          <option value="original" selected>原順序 (與 PDF 一致)</option>
+          <option value="shuffle">隨機打亂 (避免靠位置記答案)</option>
+        </select>
+      </div>
+      <div class="next-btn-row">
+        <button class="btn btn-primary" onclick="startRound()">開始作答 →</button>
+      </div>
+      <p class="note">作答時可用 <span class="kbd">A/B/C/D</span> 選答，<span class="kbd">Enter</span> 下一題，<span class="kbd">W</span> 切換「為什麼？」相關章節。</p>
+    </div>
+
+    <div class="card">
+      <h2>累計成績 · ${subjectFilter === "all" ? "全部科目" : (SUBJECTS[subjectFilter] || {}).short || subjectFilter}</h2>
+      <div class="score-display">
+        <span class="score-big">${totalCorrect}/${totalAsked}</span>
+        <span class="score-pct">${overallPct}% · ${subjectRounds.length} 回合</span>
+      </div>
+      ${weakTopics.length > 0 ? `
+      <div class="summary-section">
+        <h3>累計弱點主題（依錯題數）</h3>
+        <div>${weakTopics.slice(0, 8).map(([t, n]) => `<span class="weak-pill">${t} · 錯 ${n}</span>`).join("")}</div>
+      </div>
+      ` : `<p class="empty-state" style="padding:20px 0">尚未作答 — 開始第一回合吧。</p>`}
+      ${(() => {
+        const cumWrongs = getCumulativeWrongs(subjectFilter);
+        if (cumWrongs.length === 0) return '';
+        return `
+          <div class="summary-section">
+            <h3>累計答錯題目（${cumWrongs.length} 題未訂正）</h3>
+            <p class="note" style="margin:-4px 0 12px;">下一回合會優先抽到這些題（錯越多次權重越高）。答對一次後自動移除清單。點 💡 看解析。</p>
+            ${cumWrongs.map(w => renderMissItem(w.q, w.resp, { open: false, wrongCount: w.count })).join("")}
+          </div>` ;
+      })()}
+    </div>
+  `;
+}
+
+function renderQuiz() {
+  const r = state.round;
+  const idx = r.responses.length;
+  const total = r.questions.length;
+  const q = r.questions[idx];
+  const order = q.display_order || ["A","B","C","D"];
+  // Displayed letter that holds the correct option (e.g., if order = ["C","A","D","B"] and correct = "D", then correctDisplay = "C")
+  const correctDisplay = ["A","B","C","D"][order.indexOf(q.correct_answer)];
+  const correct = r.responses.filter(x => x.is_correct).length;
+  const justAnsweredCorrect = state.answered && state.selected === correctDisplay ? 1 : 0;
+  const displayedCorrect = correct + justAnsweredCorrect;
+  const displayedDenom = idx + (state.answered ? 1 : 0);
+  const pct = Math.round((displayedDenom / total) * 100);
+
+  const optionsHtml = order.map((origLetter, i) => {
+    const displayLetter = ["A","B","C","D"][i];
+    let cls = "option";
+    if (state.answered) {
+      cls += " answered";
+      if (displayLetter === correctDisplay) cls += " reveal-correct";
+      if (displayLetter === state.selected) cls += " selected " + (state.selected === correctDisplay ? "correct" : "wrong");
+    } else if (state.selected === displayLetter) {
+      cls += " selected";
+    }
+    const checked = state.selected === displayLetter ? 'checked' : '';
+    const disabled = state.answered ? 'disabled' : '';
+    return `
+      <label class="${cls}" data-letter="${displayLetter}">
+        <input type="radio" name="answer" value="${displayLetter}" ${checked} ${disabled} onchange="selectOption('${displayLetter}')">
+        <span class="letter">${displayLetter}.</span>
+        <span class="text">${escapeHtml(q.options[origLetter])}</span>
+      </label>`;
+  }).join("");
+
+  const ref = refForQuestion(q);
+  const guidePdf = studyGuideFor(q);
+  const shuffledNote = r.shuffled
+    ? `<p class="shuffle-note">🔀 本回合選項已隨機打亂；解析中的 A/B/C/D 已對應到本題實際顯示順序。</p>`
+    : '';
+  const explanationMd = r.shuffled
+    ? translateExplanation(q.explanation || '', q.display_order)
+    : (q.explanation || '');
+  const whyPanelHtml = state.answered && state.showWhy ? `
+    <div class="why-panel">
+      ${q.explanation ? `
+        <h3>💡 解析</h3>
+        ${shuffledNote}
+        <div class="why-explanation">${renderMarkdown(explanationMd)}</div>
+      ` : ''}
+      <h3 style="margin-top:${q.explanation ? '20px' : '0'};">📖 延伸閱讀</h3>
+      ${ref ? `
+        <div class="why-row"><span class="why-label">章節</span><span>${escapeHtml(ref.chapter)} · ${escapeHtml(ref.section)}</span></div>
+        <div class="why-row"><span class="why-label">頁碼</span><span>${escapeHtml(ref.local)}（PDF 約第 ${ref.pdf} 頁）</span></div>
+        <div class="why-links">
+          <a class="btn btn-link" href="${pdfHref(guidePdf, ref.pdf)}" target="_blank">📄 學習指引 PDF →</a>
+          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">📄 試題原文 (第 ${q.source.page} 頁) →</a>
+        </div>
+      ` : `
+        <p class="muted">此主題尚未建立章節對應，請參考試題原文。</p>
+        <div class="why-links">
+          <a class="btn btn-link" href="${pdfHref(guidePdf, 1)}" target="_blank">📄 學習指引 PDF →</a>
+          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">📄 試題原文 (第 ${q.source.page} 頁) →</a>
+        </div>
+      `}
+      <p class="muted" style="margin-top:12px;">頁碼為估計值，可在 PDF 中前後翻一兩頁尋找。</p>
+    </div>
+  ` : '';
+
+  const feedbackHtml = state.answered ? `
+    <div class="feedback ${state.selected === correctDisplay ? 'correct' : 'wrong'}">
+      <strong>${state.selected === correctDisplay ? '✓ 答對' : '✗ 答錯 — 正解：' + correctDisplay}</strong>
+      <span class="source">出處：<a href="${pdfHref(q.source.file, q.source.page)}" target="_blank" rel="noopener noreferrer">${escapeHtml(q.source.file)} · 第 ${q.source.page} 頁 ↗</a></span>
+    </div>
+    ${whyPanelHtml}
+    <div class="next-btn-row">
+      <button class="btn" onclick="toggleWhy()">${state.showWhy ? '收起' : '💡 為什麼？'}</button>
+      <button class="btn btn-primary" onclick="nextQuestion()">${idx + 1 === total ? '看結果' : '下一題'}</button>
+    </div>
+  ` : '';
+
+  return `
+    <div class="progress-bar"><div class="progress-fill" style="width:${pct}%"></div></div>
+    <div class="card">
+      <h2>
+        <span>iPAS 練習 — 第 ${idx + 1} / ${total} 題</span>
+        <span class="title-right">
+          <span class="q-topic-chip">${escapeHtml(q.topic)}</span>
+          ${q.generated ? `<span class="q-new-chip" title="AI 補充題，非官方試題">新題</span>` : ''}
+        </span>
+      </h2>
+      <div class="q-text">${escapeHtml(q.question_text)}</div>
+      ${q.image ? `<div class="q-image"><img src="${escapeHtml(q.image)}" alt="題目附圖"></div>` : ''}
+      <div class="options">${optionsHtml}</div>
+      ${feedbackHtml}
+      <div class="note" style="margin-top:16px;">本回合得分：${displayedCorrect} / ${displayedDenom}${state.answered ? ' (含本題)' : ''}</div>
+    </div>
+  `;
+}
+
+function renderMissItem(q, resp, opts = {}) {
+  const { open = false, wrongCount = 1 } = opts;
+  const ref = refForQuestion(q);
+  const guidePdf = studyGuideFor(q);
+  const subjectShort = (SUBJECTS[q.subject_code] || {}).short || "";
+  const userOpt = q.options[resp.user_answer];
+  const correctOpt = q.options[q.correct_answer];
+  const countBadge = wrongCount > 1 ? ` <span class="wrong-count-badge">錯 ${wrongCount} 次</span>` : '';
+  const subjectChip = subjectShort ? ` <span class="subject-chip">${escapeHtml(subjectShort.split("·")[0].trim())}</span>` : '';
+  return `
+    <div class="miss-item">
+      <div class="miss-q">${subjectChip}[${escapeHtml(q.topic)}]${q.generated ? ' <span class="q-new-chip" title="AI 補充題">新題</span>' : ''}${countBadge} ${escapeHtml(q.question_text.slice(0, 80))}${q.question_text.length > 80 ? '…' : ''}</div>
+      <div class="miss-detail">你選 <strong>${resp.user_answer}</strong> · 正解 <strong>${q.correct_answer}</strong> · ${escapeHtml(q.source.file)} 第 ${q.source.page} 頁</div>
+      <details class="miss-recap"${open ? ' open' : ''}>
+        <summary>💡 看解析</summary>
+        <div class="miss-recap-body">
+          <div class="miss-full-q">${escapeHtml(q.question_text)}</div>
+          ${q.image ? `<div class="q-image"><img src="${escapeHtml(q.image)}" alt="題目附圖"></div>` : ''}
+          <div class="miss-choice miss-choice-wrong"><span class="miss-choice-label">你選 ${resp.user_answer}</span><span>${userOpt ? escapeHtml(userOpt) : '(未作答)'}</span></div>
+          <div class="miss-choice miss-choice-correct"><span class="miss-choice-label">正解 ${q.correct_answer}</span><span>${escapeHtml(correctOpt)}</span></div>
+          ${q.explanation ? `<div class="why-explanation">${renderMarkdown(q.explanation)}</div>` : '<div class="miss-no-explain">（此題無解析）</div>'}
+          <div class="why-links">
+            ${ref ? `<a class="btn btn-link" href="${pdfHref(guidePdf, ref.pdf)}" target="_blank">📄 學習指引 第 ${ref.pdf} 頁</a>` : `<a class="btn btn-link" href="${pdfHref(guidePdf, 1)}" target="_blank">📄 學習指引 PDF</a>`}
+            <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">📄 試題原文 第 ${q.source.page} 頁</a>
+          </div>
+        </div>
+      </details>
+    </div>`;
+}
+
+function getCumulativeWrongs(subjectFilter) {
+  const rounds = getRounds();
+  const map = new Map();
+  rounds.forEach(r => {
+    r.responses.forEach(resp => {
+      if (resp.is_correct) {
+        if (map.has(resp.q_id)) map.get(resp.q_id).resolved = true;
+      } else {
+        const cur = map.get(resp.q_id) || { count: 0, latest: null, resolved: false };
+        cur.count++;
+        cur.latest = resp;
+        cur.resolved = false;
+        map.set(resp.q_id, cur);
+      }
+    });
+  });
+  return Array.from(map.entries())
+    .filter(([, info]) => !info.resolved && POOL.find(p => p.id === info.latest.q_id))
+    .map(([qid, info]) => ({ q: POOL.find(p => p.id === qid), resp: info.latest, count: info.count }))
+    .filter(item => !subjectFilter || subjectFilter === "all" || item.q.subject_code === subjectFilter)
+    .sort((a, b) => b.count - a.count);
+}
+
+function renderResults() {
+  const r = state.round;
+  const correct = r.responses.filter(x => x.is_correct).length;
+  const total = r.responses.length;
+  const pct = Math.round(100 * correct / total);
+  const wrongs = r.responses.filter(x => !x.is_correct);
+
+  const wrongHtml = wrongs.map(resp => renderMissItem(POOL.find(x => x.id === resp.q_id), resp, { open: true })).join("");
+
+  return `
+    <div class="card">
+      <h2>本回合結果</h2>
+      <div class="score-display">
+        <span class="score-big">${correct}/${total}</span>
+        <span class="score-pct">${pct}%</span>
+      </div>
+      <div class="summary-section">
+        <h3>主題範圍</h3>
+        <p style="margin:0;">${escapeHtml(r.scope)}</p>
+      </div>
+      ${wrongs.length > 0 ? `
+      <div class="summary-section">
+        <h3>答錯題目 (${wrongs.length})</h3>
+        ${wrongHtml}
+      </div>` : `
+      <div class="summary-section">
+        <h3>🎉 全對！</h3>
+        <p>本回合所有題目都答對了。</p>
+      </div>`}
+      <div class="next-btn-row">
+        <button class="btn" onclick="goHome()">回首頁</button>
+        <button class="btn btn-primary" onclick="redoRound()">同樣設定再來一回 →</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderHistory() {
+  const rounds = getRounds();
+  if (rounds.length === 0) {
+    return `<div class="card"><div class="empty-state">尚無歷史紀錄。</div></div>`;
+  }
+  const rows = rounds.slice().reverse().map((r, i) => {
+    const correct = r.responses.filter(x => x.is_correct).length;
+    const total = r.responses.length;
+    const pct = Math.round(100 * correct / total);
+    const date = new Date(r.started).toLocaleString("zh-TW", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" });
+    return `<tr>
+      <td>${rounds.length - i}</td>
+      <td>${escapeHtml(r.scope)}</td>
+      <td><strong>${correct}/${total}</strong> (${pct}%)</td>
+      <td>${date}</td>
+    </tr>`;
+  }).join("");
+  return `
+    <div class="card">
+      <h2>歷史紀錄</h2>
+      <table class="history-table">
+        <thead><tr><th>#</th><th>範圍</th><th>分數</th><th>日期</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+      <div class="next-btn-row">
+        <button class="btn" onclick="exportData()">匯出 JSON</button>
+        <button class="btn" onclick="resetData()" style="color:var(--wrong);">清除全部紀錄</button>
+      </div>
+    </div>
+  `;
+}
+
+// ======== CONFETTI ========
+// Lightweight inline confetti. Spawns a fixed-position canvas overlay, animates ~150
+// gravity-driven particles for ~3.5s, then removes itself. Honors prefers-reduced-motion.
+function launchConfetti() {
+  if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+  const canvas = document.createElement("canvas");
+  canvas.style.cssText = "position:fixed;inset:0;pointer-events:none;z-index:9999";
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  document.body.appendChild(canvas);
+  const ctx = canvas.getContext("2d");
+  const colors = ["#4f46e5", "#10b981", "#f59e0b", "#ef4444", "#818cf8", "#34d399", "#fcd34d"];
+  const particles = [];
+  for (let i = 0; i < 150; i++) {
+    particles.push({
+      x: canvas.width / 2 + (Math.random() - 0.5) * 240,
+      y: canvas.height / 3,
+      vx: (Math.random() - 0.5) * 14,
+      vy: -Math.random() * 9 - 4,
+      size: Math.random() * 6 + 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rot: Math.random() * Math.PI * 2,
+      rotSpeed: (Math.random() - 0.5) * 0.35
+    });
+  }
+  const start = performance.now();
+  const duration = 3500;
+  function frame(now) {
+    const elapsed = now - start;
+    const fade = Math.max(0, 1 - elapsed / duration);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let onScreen = 0;
+    for (const p of particles) {
+      p.vx *= 0.99;
+      p.vy = p.vy * 0.99 + 0.3;
+      p.x += p.vx;
+      p.y += p.vy;
+      p.rot += p.rotSpeed;
+      if (p.y < canvas.height + 50) {
+        onScreen++;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rot);
+        ctx.globalAlpha = fade;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+        ctx.restore();
+      }
+    }
+    if (onScreen > 0 && elapsed < duration) requestAnimationFrame(frame);
+    else canvas.remove();
+  }
+  requestAnimationFrame(frame);
+}
+
+// ======== ACTIONS ========
+function onLevelChange() {
+  const level = document.getElementById("level-filter").value;
+  const firstSubject = Object.entries(SUBJECTS).find(([, info]) => info.level === level);
+  state.levelFilter = level;
+  state.subjectFilter = firstSubject ? firstSubject[0] : "s1";
+  render(); // re-render home so subject/topic dropdowns reflect selected level
+}
+
+function onSubjectChange() {
+  const sel = document.getElementById("subject-filter").value;
+  state.subjectFilter = sel;
+  state.levelFilter = (SUBJECTS[sel] || {}).level || state.levelFilter || "intermediate";
+  render(); // re-render home so topic dropdown reflects new subject
+}
+
+function startRound() {
+  const subjectCode = (document.getElementById("subject-filter") || {}).value || state.subjectFilter || "s1";
+  const topic = document.getElementById("topic-filter").value;
+  const size = parseInt(document.getElementById("round-size").value, 10);
+  const shuffleOpts = document.getElementById("shuffle-options").value === "shuffle";
+  // Attach a per-question display_order. ["A","B","C","D"] means show original order;
+  // a shuffled permutation means display slot i shows the original letter at that index.
+  const questions = pickQuestions(subjectCode, topic, size).map(q => ({
+    ...q,
+    display_order: shuffleOpts ? shuffle(["A","B","C","D"]) : ["A","B","C","D"]
+  }));
+  if (questions.length === 0) { alert("此主題沒有題目。"); return; }
+  const topicLabel = topic === "all" ? "全部主題" : topic;
+  const subjectLabel = (SUBJECTS[subjectCode] || {}).short || "全部科目";
+  state.round = {
+    questions: questions,
+    responses: [],
+    subject_code: subjectCode,
+    scope: `${subjectLabel} · ${topicLabel} · ${questions.length} 題${shuffleOpts ? " · 隨機打亂" : ""}`,
+    shuffled: shuffleOpts,
+    started: new Date().toISOString()
+  };
+  state.view = "quiz";
+  state.selected = null;
+  state.answered = false;
+  state.showWhy = false;
+  render();
+}
+
+function selectOption(letter) {
+  if (state.answered) return;
+  state.selected = letter;
+  state.answered = true;
+  render();
+}
+
+function nextQuestion() {
+  // Commit the answer for the current question now (deferred until "Next" so feedback renders against the right question)
+  const idx = state.round.responses.length;
+  const q = state.round.questions[idx];
+  // Translate displayed letter (what user clicked) back to the original PDF letter (for stats consistency).
+  const order = q.display_order || ["A","B","C","D"];
+  const displayLetter = state.selected;
+  const origLetter = order[["A","B","C","D"].indexOf(displayLetter)];
+  state.round.responses.push({
+    q_id: q.id,
+    user_answer: origLetter,
+    display_letter_chosen: displayLetter,
+    display_order: order,
+    is_correct: origLetter === q.correct_answer,
+    ts: new Date().toISOString()
+  });
+  state.selected = null;
+  state.answered = false;
+  state.showWhy = false;
+  if (state.round.responses.length >= state.round.questions.length) {
+    state.round.completed = new Date().toISOString();
+    appendRound(state.round);
+    state.view = "results";
+    const total = state.round.responses.length;
+    const correct = state.round.responses.filter(x => x.is_correct).length;
+    if (total > 0 && correct / total > 0.7) launchConfetti();
+  }
+  render();
+}
+
+function toggleWhy() {
+  state.showWhy = !state.showWhy;
+  render();
+}
+
+function redoRound() {
+  const lastTopic = state.round && state.round.scope.split(" · ")[0];
+  state.round = null;
+  state.view = "home";
+  render();
+  // try to preserve topic+size
+  if (lastTopic) {
+    const sel = document.getElementById("topic-filter");
+    const opt = Array.from(sel.options).find(o => o.text.startsWith(lastTopic) || o.value === lastTopic);
+    if (opt) sel.value = opt.value;
+  }
+}
+
+function goHome() {
+  state.view = "home";
+  state.round = null;
+  state.selected = null;
+  state.answered = false;
+  state.showWhy = false;
+  render();
+}
+
+function showHistory() {
+  state.view = "history";
+  render();
+}
+
+function exportData() {
+  const data = JSON.stringify({ rounds: getRounds() }, null, 2);
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = "test-prep-history.json";
+  document.body.appendChild(a); a.click();
+  document.body.removeChild(a); URL.revokeObjectURL(url);
+}
+
+function resetData() {
+  if (!confirm("確定要清除全部歷史紀錄嗎？此動作無法復原。")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  goHome();
+}
+
+// Keyboard shortcuts — ignore when any modifier is held (so Cmd+C, Ctrl+A, etc. work normally)
+document.addEventListener("keydown", (e) => {
+  if (state.view !== "quiz") return;
+  if (e.metaKey || e.ctrlKey || e.altKey) return;
+  if (!state.answered) {
+    const k = e.key.toUpperCase();
+    if (["A","B","C","D"].includes(k)) selectOption(k);
+  } else if (e.key === "Enter") {
+    nextQuestion();
+  } else if (e.key.toUpperCase() === "W") {
+    toggleWhy();
+  }
+});
+
+loadPool().then(render).catch(showLoadError);
+</script>
+<!-- Vercel Web Analytics (static-site script injection; no build step) -->
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
