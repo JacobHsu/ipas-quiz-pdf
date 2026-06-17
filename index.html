@@ -237,41 +237,116 @@ header .nav { display: flex; gap: 8px; }
   margin-left: 6px; align-self: center;
   padding: 2px 8px; background: var(--correct-bg); border-radius: 999px;
 }
+/* Feedback: flat inline status row inside the card (no box) */
 .feedback {
-  margin-top: 20px; padding: 16px; border-radius: 10px;
+  margin-top: 18px; padding: 0;
   font-size: 14px;
+  border: none; background: none; box-shadow: none;
+  color: var(--text);
 }
-.feedback.correct { background: var(--correct-bg); color: var(--correct-fg); }
-.feedback.wrong { background: var(--wrong-bg); color: var(--wrong-fg); }
-.feedback strong { font-weight: 600; }
-.feedback .source { display: block; margin-top: 8px; font-size: 12px; opacity: 0.8; }
-.feedback .source a { color: inherit; text-decoration: underline; }
-.feedback .source a:hover { opacity: 1; text-decoration: none; }
+.feedback strong { font-weight: 700; }
+.feedback.correct strong { color: #1f7a3a; }
+.feedback.wrong strong { color: #b32020; }
+.feedback .source { display: block; margin-top: 4px; font-size: 12px; color: var(--muted); }
+.feedback .source a { color: #1f5fa8; text-decoration: underline; }
+.feedback .source a:hover { color: #0d3b6e; }
 .next-btn-row { display: flex; justify-content: flex-end; margin-top: 16px; gap: 8px; }
+/* Why-panel: in-card section, not a floating dialog. Colored left band + subtle tint. */
 .why-panel {
-  margin-top: 12px; padding: 16px;
-  background: var(--accent-soft); border: 1px solid var(--accent-soft-border);
-  border-radius: 10px;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: none;
+  border-left: 4px solid #9ca3af;
+  border-radius: 0;
+  background: rgba(0,0,0,0.03);
+  box-shadow: none;
+  overflow: visible;
 }
+.why-panel.correct {
+  border-left-color: #10b981;
+  background: rgba(16,185,129,0.07);
+}
+.why-panel.wrong {
+  border-left-color: #ef4444;
+  background: rgba(239,68,68,0.06);
+}
+/* Inline icon sizing — keeps SVG glyphs aligned with surrounding text */
+.icon {
+  width: 1em; height: 1em;
+  display: inline-block; vertical-align: -0.15em;
+  flex-shrink: 0;
+}
+.icon-lg { width: 1.15em; height: 1.15em; vertical-align: -0.2em; }
+.status-icon { margin-right: 6px; }
+.why-panel > * { padding-left: 0; padding-right: 0; }
+.why-panel > *:first-child { padding-top: 0; }
+.why-panel > *:last-child { padding-bottom: 0; }
 .why-panel h3 {
-  margin: 0 0 12px; font-size: 14px; color: var(--accent);
+  margin: 0 0 10px;
+  padding: 0;
+  font-size: 14px; font-weight: 700;
+  color: var(--text);
+  background: none;
+  border: none;
+  text-shadow: none;
+  letter-spacing: 0;
+}
+.why-panel.correct h3.why-status { color: #1f7a3a; }
+.why-panel.wrong h3.why-status { color: #b32020; }
+.why-panel h3.why-sub {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px dashed rgba(0,0,0,0.18);
+  color: var(--muted);
+  font-size: 13px;
   font-weight: 600;
 }
+.answer-compare {
+  display: flex; flex-wrap: wrap; gap: 16px;
+  padding: 0 0 10px;
+  margin-bottom: 10px;
+  font-size: 15px; line-height: 1.5;
+  border-bottom: 1px dashed rgba(0,0,0,0.12);
+}
+.answer-compare .ac-cell { display: flex; gap: 6px; align-items: baseline; }
+.answer-compare .ac-label { color: var(--muted); font-size: 13px; }
+.answer-compare .ac-mine-wrong {
+  color: #b32020; font-weight: 700; text-decoration: line-through;
+  text-decoration-color: rgba(179,32,32,0.6);
+}
+.answer-compare .ac-correct { color: #1f7a3a; font-weight: 700; }
+.answer-compare .ac-correct.only { color: #1f7a3a; }
 .why-row {
   display: flex; gap: 12px; align-items: flex-start;
-  font-size: 13px; margin-bottom: 6px; line-height: 1.5;
+  font-size: 15px; margin-bottom: 6px; line-height: 1.6;
 }
 .why-row .why-label {
   flex-shrink: 0; min-width: 50px; color: var(--muted);
   font-weight: 500;
 }
 .why-links { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+/* Win7 silver button (smaller variant) for the explanation panel's links */
 .btn-link {
-  background: var(--card); color: var(--accent);
-  border-color: var(--accent-soft-border); font-size: 13px; padding: 6px 12px;
+  color: #000000;
+  border: 1px solid #707070;
+  border-radius: 3px;
+  font-size: 13px; padding: 4px 12px;
   text-decoration: none;
+  background: linear-gradient(to bottom,
+    #f5f5f5 0%, #e8e8e8 45%, #d8d8d8 50%, #e2e2e2 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    inset 0 -1px 0 rgba(0,0,0,0.05);
+  text-shadow: 0 1px 0 rgba(255,255,255,0.6);
 }
-.btn-link:hover { background: var(--card); border-color: var(--accent); }
+.btn-link:hover {
+  border-color: #3c7fb1;
+  background: linear-gradient(to bottom,
+    #eaf6fd 0%, #d9f0fc 45%, #bee6fd 50%, #a7d9f5 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.85),
+    0 0 4px rgba(60,127,177,0.4);
+}
 .why-panel .muted { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
 .shuffle-note {
   font-size: 12px; color: var(--warn-fg); background: var(--warn-bg);
@@ -279,7 +354,7 @@ header .nav { display: flex; gap: 8px; }
   border-left: 3px solid var(--warn-border);
 }
 .shuffle-note strong { color: var(--warn-fg-strong); }
-.why-explanation { font-size: 14px; line-height: 1.7; color: var(--text); }
+.why-explanation { font-size: 16px; line-height: 1.75; color: var(--text); }
 .why-explanation p { margin: 0 0 10px; }
 .why-explanation p:last-child { margin-bottom: 0; }
 .why-explanation ul { margin: 4px 0 12px 20px; padding: 0; }
@@ -597,6 +672,17 @@ function translateExplanation(md, displayOrder) {
   return result.join("\n");
 }
 
+// Inline Lucide icons (https://lucide.dev) — chosen for the shadcn/ui aesthetic without the framework.
+const ICONS = {
+  checkCircle: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+  xCircle: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+  bookOpen: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>',
+  fileText: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
+  shuffle: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>',
+  helpCircle: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  arrowRight: '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>',
+};
+
 // Tiny markdown renderer for explanations: handles **bold**, `code`, bullet lists ("- "), and paragraph breaks.
 // Escapes everything else as HTML to stay safe.
 function renderMarkdown(md) {
@@ -791,31 +877,44 @@ function renderQuiz() {
   const ref = refForQuestion(q);
   const guidePdf = studyGuideFor(q);
   const shuffledNote = r.shuffled
-    ? `<p class="shuffle-note">🔀 本回合選項已隨機打亂；解析中的 A/B/C/D 已對應到本題實際顯示順序。</p>`
+    ? `<p class="shuffle-note">${ICONS.shuffle} 本回合選項已隨機打亂；解析中的 A/B/C/D 已對應到本題實際顯示順序。</p>`
     : '';
   const explanationMd = r.shuffled
     ? translateExplanation(q.explanation || '', q.display_order)
     : (q.explanation || '');
+  const isWrong = state.selected !== correctDisplay;
+  const statusTitle = isWrong
+    ? `<span class="status-icon">${ICONS.xCircle}</span>答錯了 — 看看為什麼`
+    : `<span class="status-icon">${ICONS.checkCircle}</span>答對了 — 補充說明`;
+  const answerCompareHtml = isWrong
+    ? `<div class="answer-compare">
+         <div class="ac-cell"><span class="ac-label">你選</span><span class="ac-mine-wrong">${state.selected}</span></div>
+         <div class="ac-cell"><span class="ac-label">正解</span><span class="ac-correct">${correctDisplay}</span></div>
+       </div>`
+    : `<div class="answer-compare">
+         <div class="ac-cell"><span class="ac-label">正解</span><span class="ac-correct only">${correctDisplay}</span></div>
+       </div>`;
   const whyPanelHtml = state.answered && state.showWhy ? `
-    <div class="why-panel">
+    <div class="why-panel ${isWrong ? 'wrong' : 'correct'}">
+      <h3 class="why-status">${statusTitle}</h3>
+      ${answerCompareHtml}
       ${q.explanation ? `
-        <h3>💡 解析</h3>
         ${shuffledNote}
         <div class="why-explanation">${renderMarkdown(explanationMd)}</div>
       ` : ''}
-      <h3 style="margin-top:${q.explanation ? '20px' : '0'};">📖 延伸閱讀</h3>
+      <h3 class="why-sub"><span class="status-icon">${ICONS.bookOpen}</span>延伸閱讀</h3>
       ${ref ? `
         <div class="why-row"><span class="why-label">章節</span><span>${escapeHtml(ref.chapter)} · ${escapeHtml(ref.section)}</span></div>
         <div class="why-row"><span class="why-label">頁碼</span><span>${escapeHtml(ref.local)}（PDF 約第 ${ref.pdf} 頁）</span></div>
         <div class="why-links">
-          <a class="btn btn-link" href="${pdfHref(guidePdf, ref.pdf)}" target="_blank">📄 學習指引 PDF →</a>
-          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">📄 試題原文 (第 ${q.source.page} 頁) →</a>
+          <a class="btn btn-link" href="${pdfHref(guidePdf, ref.pdf)}" target="_blank">${ICONS.fileText} 學習指引 PDF</a>
+          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">${ICONS.fileText} 試題原文 (第 ${q.source.page} 頁)</a>
         </div>
       ` : `
         <p class="muted">此主題尚未建立章節對應，請參考試題原文。</p>
         <div class="why-links">
-          <a class="btn btn-link" href="${pdfHref(guidePdf, 1)}" target="_blank">📄 學習指引 PDF →</a>
-          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">📄 試題原文 (第 ${q.source.page} 頁) →</a>
+          <a class="btn btn-link" href="${pdfHref(guidePdf, 1)}" target="_blank">${ICONS.fileText} 學習指引 PDF</a>
+          <a class="btn btn-link" href="${pdfHref(q.source.file, q.source.page)}" target="_blank">${ICONS.fileText} 試題原文 (第 ${q.source.page} 頁)</a>
         </div>
       `}
       <p class="muted" style="margin-top:12px;">頁碼為估計值，可在 PDF 中前後翻一兩頁尋找。</p>
@@ -824,12 +923,14 @@ function renderQuiz() {
 
   const feedbackHtml = state.answered ? `
     <div class="feedback ${state.selected === correctDisplay ? 'correct' : 'wrong'}">
-      <strong>${state.selected === correctDisplay ? '✓ 答對' : '✗ 答錯 — 正解：' + correctDisplay}</strong>
+      <strong>${state.selected === correctDisplay
+        ? `<span class="status-icon">${ICONS.checkCircle}</span>答對`
+        : `<span class="status-icon">${ICONS.xCircle}</span>答錯 — 正解：${correctDisplay}`}</strong>
       <span class="source">出處：<a href="${pdfHref(q.source.file, q.source.page)}" target="_blank" rel="noopener noreferrer">${escapeHtml(q.source.file)} · 第 ${q.source.page} 頁 ↗</a></span>
     </div>
     ${whyPanelHtml}
     <div class="next-btn-row">
-      <button class="btn" onclick="toggleWhy()">${state.showWhy ? '收起' : '💡 為什麼？'}</button>
+      <button class="btn" onclick="toggleWhy()">${state.showWhy ? '收起' : `${ICONS.helpCircle} 為什麼？`}</button>
       <button class="btn btn-primary" onclick="nextQuestion()">${idx + 1 === total ? '看結果' : '下一題'}</button>
     </div>
   ` : '';
@@ -1079,6 +1180,12 @@ function selectOption(letter) {
   if (state.answered) return;
   state.selected = letter;
   state.answered = true;
+  // Auto-reveal explanation on wrong answers — the user needs it most then.
+  const r = state.round;
+  const q = r.questions[r.responses.length];
+  const order = q.display_order || ["A","B","C","D"];
+  const correctDisplay = ["A","B","C","D"][order.indexOf(q.correct_answer)];
+  if (letter !== correctDisplay) state.showWhy = true;
   render();
 }
 
