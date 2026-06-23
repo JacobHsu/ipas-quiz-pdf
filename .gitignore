@@ -2,8 +2,10 @@
 .DS_Store
 
 # Tool symlinks (point to ~/.agents/skills-bullpen/, not portable)
-.claude/
+.claude/*
 .agents/
+# Exception: portable slash commands are shared with the repo
+!.claude/commands/
 
 # Sidecar / temp files
 *.tmp
