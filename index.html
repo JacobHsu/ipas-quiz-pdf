@@ -232,10 +232,14 @@ header .nav { display: flex; gap: 8px; }
 .option.reveal-correct .letter,
 .option.reveal-correct .text { font-weight: 600; }
 .option.reveal-correct::after {
-  content: "✓"; color: var(--correct);
-  font-size: 18px; font-weight: 700;
+  content: "✓"; color: #fff;
+  background: var(--correct);
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 700;
   margin-left: 6px; align-self: center;
-  line-height: 1;
+  flex-shrink: 0;
 }
 /* Feedback: flat inline status row inside the card (no box) */
 .feedback {
