@@ -1,7 +1,7 @@
 ---
 description: Review a GitHub PR using gh CLI with tiered severity report
 argument-hint: <PR_NUMBER>
-allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bash(gh pr comment:*), Bash(gh pr review:*), Read, Grep
+allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Read, Grep
 ---
 
 對 PR #$1 進行 code review。
@@ -70,7 +70,7 @@ allowed-tools: Bash(gh pr view:*), Bash(gh pr diff:*), Bash(gh pr checks:*), Bas
 > - **B** · `gh pr review $1 --comment --body-file <tmp>` — 正式 review（顯示在 Files changed tab）
 > - **C** · 不貼，只在本地看
 
-依使用者回應決定是否執行貼回動作。**不要自動貼**。
+依使用者回應決定是否執行貼回動作。**不要自動貼**。貼回所需的 `gh pr comment` / `gh pr review` 未列入 `allowed-tools`，每次貼回都會觸發 permission prompt，這是刻意設計以防誤觸。
 
 ## 注意
 
