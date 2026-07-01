@@ -1239,6 +1239,8 @@ function redoRound() {
     const opt = Array.from(sel.options).find(o => o.text.startsWith(lastTopic) || o.value === lastTopic);
     if (opt) sel.value = opt.value;
   }
+  const startBtn = document.querySelector('[onclick="startRound()"]');
+  if (startBtn) startBtn.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function goHome() {
